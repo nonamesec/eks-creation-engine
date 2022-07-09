@@ -45,7 +45,7 @@ class NonameSecuritySetup():
         print(f'Installing Noname Docker Image secret-credentials')
         docker_user= 'changethis'
         docker_password= 'changethis'
-        docker_registry='nonamesec.jfrog.io/noname-docker-sensor-release-local/3.1.0/noname-sensor'
+        docker_registry='changethis/noname-sensor'
         namespace='default'
         installnnDocker = f'kubectl create secret docker-registry secret-credentials --docker-server=$docker_registry --docker-username=$docker_user --docker-password=$docker_password --namespace=$namespace'
         installnnSubprocess1 = subprocess.run(installnnDocker, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -55,7 +55,7 @@ class NonameSecuritySetup():
         # Use subprocess to configure Noname per initiation arguments from main.py
 
         print(f'Installing Noname Sensor')
-        installnnSensor = f'kubectl apply -f noname_security_sensor_DaemonSet.yml'
+        installnnSensor = f'kubectl apply -f noname_security_sensor.yml'
         installnnSubprocess2 = subprocess.run(installnnSensor, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         installnnMsg = str(installnnSubprocess2.stdout.decode('utf-8'))
         print(installnnMsg)
@@ -67,7 +67,7 @@ class NonameSecuritySetup():
         '''
 
         # Uninstall Noname from EKS, /opt/noname/uninstall.sh 
-        nnRemoveCmd = 'helm uninstall noname'
+        nnRemoveCmd = 'kubectl delete -f noname_security_sensor.yml'
         nnRemoveSubprocess = subprocess.run(nnRemoveCmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         nnRemoveMsg = str(nnRemoveSubprocess.stdout.decode('utf-8'))
         print(nnRemoveMsg)
