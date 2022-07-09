@@ -22,6 +22,12 @@ import subprocess
 
 '''
 This Class manages deployment of Noname Security's Kubernetes Agent (DaemonSet) onto an EKS Cluster and rollbacks / manual deletions
+
+a Sidecar and Ingress integration are also possible
+
+documentation 
+https://docs.nonamesecurity.com/docs/kubernetes-daemonset-integration
+https://docs.nonamesecurity.com/docs/nginx-ingress-controller-integration
 '''
 class NonameSecuritySetup():
 
